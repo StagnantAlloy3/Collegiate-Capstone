@@ -109,6 +109,12 @@ is not available, select "Download" and choose a Java 19 jre. I am personally us
 <p>I haven't gotten this far yet, but putting here as a placeholder for circling back.  Will update when I install VCS 
 and get it configured.</p>
 
+<hr>
+
+<h2>Packages</h2>
+<small>Will come as added to project. For now, just boilerplate React Native project and java REST API are used.</small>
+<hr>
+
 <small>
     <p>Author: Augustine Collins - Capstone 2024</p>
 </small>
