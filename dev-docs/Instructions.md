@@ -45,7 +45,7 @@ require android studio for the emulated android device, which the guide linked a
 <b>SKIP the "create a new application" portion.</b> Instead, clone and open the template project in VSC.</p>
 
 <h3>React Native Testing</h3>
-<liWith the project open, in the root directory of the React portion of the project, open terminal and type "npm 
+<li>With the project open, in the root directory of the React portion of the project, open terminal and type "npm 
 start".</li>  
 <li>This will start the metro server used to run the application. From there, use "a" to launch on Android.</li>
 <li>The virtual device you set up earlier should launch and install the apk.  This may take some time on first compile.</li>
