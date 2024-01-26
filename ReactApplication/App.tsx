@@ -8,7 +8,6 @@
 import React, {useState} from 'react';
 import {
     StatusBar,
-    StyleSheet,
     Text,
     useColorScheme,
     View,
