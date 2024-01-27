@@ -13,127 +13,95 @@ import {
     View,
 } from 'react-native';
 
+import {useTheme} from '@react-navigation/native';
+
 import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
-function Home() {
+function Home({props}: { props: any }) {
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "black"}}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
             <Text>Home Screen</Text>
         </View>
     );
 }
 
-function DetailsScreen() {
+function DetailsScreen({props} : {props: any}) {
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
             <Text>Details Screen</Text>
         </View>
     );
 }
 
 function App(): React.JSX.Element {
-    const isDarkMode = useColorScheme() === 'dark';
-
+    const isDarkMode = useColorScheme() == 'dark';
     const theme = useState(isDarkMode ? darkTheme : lightTheme);
+    const stripTheme = useTheme();
+
+    //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
+    stripTheme.colors.secondaryContainer = 'transparent';
 
     const Tab = createMaterialBottomTabNavigator();
+
+
 
     return (
         <NavigationContainer>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                       backgroundColor={theme.colors.notification}/>
-            <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.primary} barStyle={{backgroundColor: theme.colors.border}}>
-                <Tab.Screen name="Home" component={Home}
+                       backgroundColor={theme.colors.background}/>
+            <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
+                           shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
+                <Tab.Screen name="Home" children={() => <Home props={theme}/> }
                             options={{
                                 tabBarLabel: 'Home',
-                                tabBarIcon: () => (<MaterialIcons name="home" color={theme.colors.card} size={26}/>),
-                                tabBarBadge: 3
+                                tabBarIcon: () => (<MaterialIcons name="home" color={theme.colors.navBarIcon} size={26}/>),
                             }}
                 />
-                <Tab.Screen name="Details" component={DetailsScreen} options={{
+                <Tab.Screen name="Details" children={() => <DetailsScreen props={theme}/>} options={{
                     tabBarLabel: 'Details',
-                    tabBarIcon: () => (<MaterialIcons name="info" color="blue" size={26}/>),
+                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
+                }}
+                />
+                <Tab.Screen name="Details2" children={() => <DetailsScreen props={theme}/>} options={{
+                    tabBarLabel: 'Details',
+                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
                 }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
-        /*<SafeAreaView style={backgroundStyle}>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-          <Header />
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}>
-            <View
-              style={{
-                backgroundColor: isDarkMode ? Colors.black : Colors.white,
-              }}>
-              <Section title="Step One">
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Section>
-              <Section title="See Your Changes">
-                <ReloadInstructions />
-              </Section>
-              <Section title="Debug">
-                <DebugInstructions />
-              </Section>
-              <Section title="Learn More">
-                Read the docs to discover what to do next:
-              </Section>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
-        </SafeAreaView>*/
     );
 }
-
-/*const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
-});*/
 
 const lightTheme = {
     dark: false,
     colors: {
-        primary: '#3A356E',
-        background: '#00F4CC',
-        card: '#F5F549',
         text: '#000000',
-        border: '#EFB7FF',
-        secondary: '#4F81F7',
+        primary: '#D2D2C8',
+        secondary: '#F0F5EF',
+        warning: '#B6B7B2',
+        border: '#EFF1E6',
+        background: '#E0E2D7',
+        navBarBackground: '#E0E2D7',
+        navBarIcon: '#B6B7B2',
+        navBarText: '##B6B7B2',
     },
 };
 
 const darkTheme = {
-    dark: false,
+    dark: true,
     colors: {
-        primary: 'rgb(45,104,255)',
-        background: 'rgba(242,242,242,0.29)',
-        card: 'rgba(255,255,255,0.44)',
-        text: 'rgb(28, 28, 30)',
-        border: 'rgba(199,199,204,0.6)',
-        notification: 'rgb(90,236,7)',
-        secondary: 'rgb(28, 28, 30)',
+        text: '#ffffff',
+        primary: '#4F81F7',
+        secondary: '#3A356E',
+        warning: '#F5F549',
+        border: '#00F4CC',
+        background: '#000000',
+        navBarBackground: '#000000',
+        navBarIcon: '#EFB7FF',
+        navBarText: '#EFB7FF',
     },
 }
 
