@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ReactApplication/android" />
+    <file type="web" url="file://$PROJECT_DIR$/ReactApplication/node_modules/@react-native/gradle-plugin" />
+    <file type="web" url="file://$PROJECT_DIR$/ReactApplication/node_modules/react-native-safe-area-context/android" />
+    <file type="web" url="file://$PROJECT_DIR$/ReactApplication/node_modules/react-native-screens/android" />
+    <file type="web" url="file://$PROJECT_DIR$/ReactApplication/node_modules/react-native-vector-icons/android" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
