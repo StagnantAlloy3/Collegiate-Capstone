@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/ReactApplication/node_modules/@react-native/gradle-plugin" name="react-native-gradle-plugin">
+                <projects>
+                  <project path="$PROJECT_DIR$/ReactApplication/node_modules/@react-native/gradle-plugin" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ReactApplication/android" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ReactApplication/android" />
+            <option value="$PROJECT_DIR$/ReactApplication/android/app" />
+            <option value="$PROJECT_DIR$/ReactApplication/node_modules/@react-native/gradle-plugin" />
+            <option value="$PROJECT_DIR$/ReactApplication/node_modules/react-native-safe-area-context/android" />
+            <option value="$PROJECT_DIR$/ReactApplication/node_modules/react-native-screens/android" />
+            <option value="$PROJECT_DIR$/ReactApplication/node_modules/react-native-vector-icons/android" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

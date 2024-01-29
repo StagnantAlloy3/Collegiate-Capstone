@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {
     StatusBar,
     Text,
@@ -38,7 +38,7 @@ function DetailsScreen({props} : {props: any}) {
 
 function App(): React.JSX.Element {
     const isDarkMode = useColorScheme() == 'dark';
-    const theme = useState(isDarkMode ? darkTheme : lightTheme);
+    const theme = isDarkMode ? darkTheme : lightTheme;
     const stripTheme = useTheme();
 
     //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
