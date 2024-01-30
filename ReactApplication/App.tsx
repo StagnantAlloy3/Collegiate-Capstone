@@ -19,14 +19,8 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import ManualItemSearch from "./Pages/ManualItemSearch";
 
-function Home({props}: { props: any }) {
-    return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
-            <Text>Home Screen</Text>
-        </View>
-    );
-}
 
 function DetailsScreen({props} : {props: any}) {
     return (
@@ -54,10 +48,10 @@ function App(): React.JSX.Element {
                        backgroundColor={theme.colors.background}/>
             <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
                            shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
-                <Tab.Screen name="Home" children={() => <Home props={theme}/> }
+                <Tab.Screen name="Search" children={() => <ManualItemSearch props={theme}/> }
                             options={{
-                                tabBarLabel: 'Home',
-                                tabBarIcon: () => (<MaterialIcons name="home" color={theme.colors.navBarIcon} size={26}/>),
+                                tabBarLabel: 'Search',
+                                tabBarIcon: () => (<MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),
                             }}
                 />
                 <Tab.Screen name="Details" children={() => <DetailsScreen props={theme}/>} options={{
