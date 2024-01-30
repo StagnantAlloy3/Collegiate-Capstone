@@ -21,6 +21,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import NestedStack from "./Pages/NestedStack.tsx";
+import ManualItemSearch from "./Pages/ManualItemSearch";
 
 
 function DetailsScreen({props}: { props: any }) {
