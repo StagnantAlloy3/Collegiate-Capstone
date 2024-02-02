@@ -1,11 +1,27 @@
 <h1>Instructions</h1>
 <p>This document serves are instructions for setup and validation of the project requirements.</p>
 <hr>
+
+<h2>Java Installation and Testing</h2>
+<h5><a href="https://docs.oracle.com/en/java/javase/19/index.html">Java Documentation</a></h5>
+<h3>Java Installation</h3>
+<li>Download the Java 19.0.2 JDK from <a href="https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html">here</a> 
+for your specific OS.  I chose the Windows x64 msi installer.</li>
+<li>Launch the installer and follow the prompts.  No custom options are necessary.</li>
+<li>Add the jdk path to the system variables.  In Windows, under System Properties -> Environment Variables -> System 
+Variables, select 'new' if you do not already have a JAVA_HOME variable name, and add "JAVA_HOME" as the variable name and 
+the jdk-19.0.2 folder path as the value.  The default java path is: C:\Program Files\Java\jdk-19.0.2. If you already have 
+a JAVA_HOME variable, change the value to the path of the 19.0.2 version.</li>
+<li>Reboot the system.</li>
+<h3>Java Testing</h3>
+<li>Open a terminal window and type "java --version".  You should see "java 19.0.2" if the installation was successful.</li>
+
 <h2>Tomcat Installation and Testing</h2>
 <h5><a href="https://tomcat.apache.org/tomcat-9.0-doc/index.html">Tomcat Documentation</a></h5>
 <h3>Tomcat Installation</h3>
-<li>Download tomcat .zip (https://tomcat.apache.org/download-90.cgi).  I am specifying version 9.0.85 as this projects 
-version as anything higher than 9.x.x swaps to Jakarta.</li>
+<li>Download tomcat .zip (Core) from <a href="https://tomcat.apache.org/download-90.cgi">here</a> for your specific OS.  
+I am specifying version 9.0.85 as this projects version as anything higher than 9.x.x swaps to Jakarta. I also specifically 
+chose the "zip" option and not the 32 or 64 bit Windows zip.</li>
 <li>Extract the zip and place it in a known directory to reference later.</li>
 <h3>Testing Tomcat</h3>
 <li>Double click the startup.bat file located in *tomcatinstallfolder*/bin/startup.sh.  You can also launch through 
@@ -19,10 +35,6 @@ terminal or catalina.out log in *tomcatinstallfolder*/logs/catalina.out</li>
 <li>Launch tomcat and navigate to http://localhost:8080/*nameofthewarfile*</li>
 <small>There may be Auto-Deploy integration with VS Code like IntelliJ has.  I will update if an easier method is 
 available.</small>
-<h3>Troubleshooting</h3>
-<li>A port is already in use: Go to the root tomcat folder and navigate to conf and open the server.xml file.  Search for
-the occupied port.  Be aware that if you change the deploy port (8080), you may need to alter code in the project to reflect 
-the port change.</li>
 <hr>
 
 <h2>NodeJS Installation and Testing</h2>
@@ -40,21 +52,21 @@ npm was installed correctly, run 'npm --version'.  You should see '9.6.7'.</li>
 
 <h2>React Native Installation and Testing</h2>
 <h5><a href="https://reactnative.dev/docs/getting-started">React Native Documentation</a></h5>
-<small>I referenced <a href="https://reactnative.dev/docs/environment-setup?guide=native">this</a> guide long ago for
+<small>I referenced <a href="https://reactnative.dev/docs/environment-setup?guide=native">this</a> guide long ago for 
 installation. It covers the steps to install all dependencies for React from a fresh Windows installation.</small>
 
 <h3>React Native Installation</h3>
 <p>I have had android studio and react setup for some time now, so I don't remember all the setup exactly. It does 
 require android studio for the emulated android device, which the guide linked above covers.
-<b>SKIP the "create a new application" portion.</b> Instead, clone and open the template project in VSC.  Additionally,
-after launching the project in your editor of choice, open a terminal window in the ReactApplication directory and run
-the command 'npm install'.  This will install the required node modules for this project that are not included in the 
-repo. Without this, the project will not launch and other node oddities may occur. (IntelliJ or any of the JetBrains 
-IDE's will auto-install the packages when the project is detected as a module.)</p>
+<b>SKIP the "create a new application" portion.</b> Instead, clone and open the template project in VSC.</p>
 
 <h3>React Native Testing</h3>
 <li>With the project open, in the root directory of the React portion of the project, open terminal and type "npm 
-start".</li>  
+start".</li>
+<small>If you receive an error stating 'react-native' is not recognized as an internal or external command, operable 
+program or batch file', you need to either: Add npm to the PATH in system properties -> environment variables -> system variables: 
+C:\Users[USER-NAME]\AppData\Roaming\npm (or wherever your npm instance is from root) OR Globally install the react cli 
+with: npm install -g react-native-cli from cmd/terminal.</small>
 <li>This will start the metro server used to run the application. From there, use "a" to launch on Android.</li>
 <li>The virtual device you set up earlier should launch and install the apk.  This may take some time on first compile.</li>
 <li>Verify that the application launches on the virtual device.</li>
@@ -64,6 +76,7 @@ start".</li>
 process is occupying 8081.  To verify if node is the issue, open task manager on windows (or equivalent) and search for a node.js 
 task. Kill the task from task manager, and run the start command again.  If the issue persists, check in resource manager for port 
 usage.</li>
+<hr>
 <hr>
 
 <h2>MongoDB Installation and Testing</h2>
@@ -82,8 +95,7 @@ preferred. (recommended)</li>
 >db.Test.insertOne({"name":"test","data":"test"})
 
 <li>This generated a collection titled "Test" and an object with a name and date field both with the value of "test".  
-If this data shows in compass after executing the command, the DB is working as intended.
-<small>You may need to refresh the database to see the changes.</small></li>
+If this data shows in compass after executing the command, the DB is working as intended.</li>
 <small>IntelliJ has built-in database integration with a query console.  VS Code may have a similar feature, but I'm not 
 sure. I will update if I find similar functionality in VSC.</small>
 <hr>
