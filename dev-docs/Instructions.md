@@ -297,6 +297,17 @@ and get it configured.</p>
 
 <hr>
 
+<h3>Android Port Forwarding (Emulator and Physical Device)</h3>
+<p>To enable the endpoint integration with the react application, you will need to enable port forwarding from the android device to your PC/mac.  To do this:
+<li>Open a new terminal window.</li>
+<li>Type 'adb devices'. This will show a list of connected android devices with USB-debugging.</li>
+<li>Type 'adb -s *DEVICE NAME AS LISTED* reverse tcp:*tomcat port number* tcp:*tomcatportnumber*'.For me, that command looked 
+like this: 'adb -s emulator-554 reverse tcp:8080 tcp:8080'.</li>
+This will enable the phone or emulated decide to route through the computers port, instead of using its own.  Without doing 
+this, you will receive network errors with all the endpoint functionality.  This process will need to be done each time the device is disconnected from the host computer. :(</p>
+
+<hr>
+
 <h2>Packages</h2>
 <small>Will come as added to project. For now, just boilerplate React Native project and java REST API are used.</small>
 <hr>
