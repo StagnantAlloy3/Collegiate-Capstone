@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, TextInput, View} from "react-native";
-import {Banner} from "react-native-paper";
 import {ByName} from "../Query Functions/ByName";
 
 function ManualItemSearch({props} : {props: any}): React.JSX.Element {
@@ -13,6 +12,7 @@ function ManualItemSearch({props} : {props: any}): React.JSX.Element {
             </View>
 
             <Text>Manual Item Search</Text>
+
         </View>
     );
 }
