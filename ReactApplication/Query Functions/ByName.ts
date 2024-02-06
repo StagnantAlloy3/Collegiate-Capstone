@@ -2,7 +2,9 @@ import React from 'react';
 
 export function ByName(itemName: string){
 
-    fetch('http://localhost:8080/api/items/name/' + itemName, {
+    console.log("ByName function called with itemName: " + itemName)
+
+    fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-name?itemname=${itemName}`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',

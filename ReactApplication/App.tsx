@@ -36,6 +36,7 @@ function App(): React.JSX.Element {
     const stripTheme = useTheme();
 
     //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
+    // @ts-ignore
     stripTheme.colors.secondaryContainer = 'transparent';
 
     const Tab = createMaterialBottomTabNavigator();
