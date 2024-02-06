@@ -83,22 +83,6 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
             {bodyBlock}
         </View>
     );
-
-    /*return (
-        <View style={{ backgroundColor: props.colors.background}}>
-            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
-            <View style={{backgroundColor: props.colors.background}}>
-                <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
-                           style={{borderColor: props.colors.border, borderStyle: 'solid', borderWidth: 1, color: props.colors.text}} placeholderTextColor={props.colors.text}/>
-            </View>
-            <FlatList data={items} renderItem={({item}) => (
-                <ListItem
-                    title={item.description}
-                    onClick={() => console.log(item)}
-                />
-            )}/>
-        </View>
-    );*/
 }
 
 export default ManualItemSearch;
