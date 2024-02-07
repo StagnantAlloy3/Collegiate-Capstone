@@ -1,6 +1,8 @@
 import React from 'react';
 
-export function ByName(itemName: string){
+export function ByName(itemName: string) {
+
+    const [json, setJson] = React.useState([])
 
     console.log("ByName function called with itemName: " + itemName)
 
@@ -12,10 +14,10 @@ export function ByName(itemName: string){
         },
     }).then((response => response.json()))
         .then((json) => {
-            console.log(json);
-            return json;
+            setJson(json);
         }).catch((error) => {
         console.error(error);
         return error;
     });
+    return json;
 }
