@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.collins.augustine.foodapi.items","l":"ByName"},{"p":"<Unnamed>","l":"ByNameTest"},{"p":"com.collins.augustine.foodapi","l":"HelloApplication"},{"p":"com.collins.augustine.foodapi","l":"HelloResource"}];updateSearchResults();

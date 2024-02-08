@@ -1,4 +1,4 @@
-package com.collins.augustine.foodapi.items;
+package com.collins.augustine.foodapi;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -16,8 +16,23 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
 
+/**
+ * This class provides an endpoint for querying items by their name from a MongoDB database.
+ * The endpoint is accessible via a GET request to "/items/by-name".
+ *
+ * @author Augustine Collins
+ */
+
 @Path("/items/by-name")
 public class ByName {
+
+    /**
+     * The method returns a JSON array of items that match the query value.
+     * @param name The query value.
+     * @return A JSON array of items that match the query value.
+     *
+     * @author Augustine Collins
+     */
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
