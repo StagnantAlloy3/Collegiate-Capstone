@@ -42,7 +42,6 @@ function App(): React.JSX.Element {
     const Tab = createMaterialBottomTabNavigator();
 
 
-
     return (
         <NavigationContainer>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}

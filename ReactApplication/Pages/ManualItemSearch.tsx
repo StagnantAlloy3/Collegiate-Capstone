@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, TextInput, View} from "react-native";
-import {List} from "react-native-paper";
+import {FlatList, Text, TextInput, Touchable, TouchableOpacity, View} from "react-native";
+import ListImage from "react-native-paper/lib/typescript/components/List/ListImage";
 
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
@@ -8,6 +8,7 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
 
     const [search, setSearch] = useState('');
     const [items, setItems] = useState([]);
+    let bodyBlock;
 
 
     useEffect(() => {
@@ -29,29 +30,75 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
                     console.error(error);
                     return error;
                 });
-            }
-            else {
+            } else {
                 setItems([]);
             }
         }, 1000);
         return () => clearTimeout(delaySearch);
     }, [search]);
 
+    const ListItem = ({title, onClick}) => {
+        return (
+            <TouchableOpacity onPress={onClick}
+                              style={{borderBottomWidth: 1, borderColor: props.colors.border, borderStyle: "solid"}}>
+                <View style={{padding: 10, backgroundColor: props.colors.background}}>
+                    <Text style={{color: props.colors.text}}>{title}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+    }
+
+    if (items.length == 0) {
+        bodyBlock = <View style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: props.colors.background,
+            height: "100%"
+        }}>
+            <Text>No Items Found</Text>
+        </View>;
+    } else {
+        bodyBlock = <View>
+            <FlatList data={items} renderItem={({item}) => (
+                <ListItem
+                    title={item.description}
+                    onClick={() => console.log(item)}
+                />
+            )}/>
+        </View>;
+    }
+
     return (
-        <View>
+        <View style={{backgroundColor: props.colors.background}}>
+            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
             <View style={{backgroundColor: props.colors.background}}>
                 <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
-                           style={{borderColor: props.colors.border, borderStyle: 'solid', borderWidth: 1, color: props.colors.text}}/>
+                           style={{
+                               borderColor: props.colors.border,
+                               borderStyle: 'solid',
+                               borderWidth: 1,
+                               color: props.colors.text
+                           }} placeholderTextColor={props.colors.text}/>
+            </View>
+            {bodyBlock}
+        </View>
+    );
+
+    /*return (
+        <View style={{ backgroundColor: props.colors.background}}>
+            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
+            <View style={{backgroundColor: props.colors.background}}>
+                <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
+                           style={{borderColor: props.colors.border, borderStyle: 'solid', borderWidth: 1, color: props.colors.text}} placeholderTextColor={props.colors.text}/>
             </View>
             <FlatList data={items} renderItem={({item}) => (
-                <List.Item
+                <ListItem
                     title={item.description}
-                    onPress={() => console.log(item)}
-                    style={{ borderBottomColor: props.colors.border, borderBottomWidth: 1 }}
+                    onClick={() => console.log(item)}
                 />
             )}/>
         </View>
-    );
+    );*/
 }
 
 export default ManualItemSearch;
