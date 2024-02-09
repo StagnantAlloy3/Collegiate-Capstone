@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, TextInput, Touchable, TouchableOpacity, View} from "react-native";
-import ListImage from "react-native-paper/lib/typescript/components/List/ListImage";
+import {FlatList, Text, TextInput, TouchableOpacity, View} from "react-native";
 
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
