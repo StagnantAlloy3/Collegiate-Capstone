@@ -18,13 +18,15 @@ import {useTheme} from '@react-navigation/native';
 import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ManualItemSearch from "./Pages/ManualItemSearch";
+import NestedStack from "./Pages/NestedStack.tsx";
 
 
-function DetailsScreen({props} : {props: any}) {
+function DetailsScreen({props}: { props: any }) {
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
+        <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
             <Text>Details Screen</Text>
         </View>
     );
@@ -46,27 +48,34 @@ function App(): React.JSX.Element {
         <NavigationContainer>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                        backgroundColor={theme.colors.background}/>
-            <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
+            <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon}
+                           barStyle={{backgroundColor: theme.colors.navBarBackground}}
                            shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
-                <Tab.Screen name="Search" children={() => <ManualItemSearch props={theme}/> }
+                <Tab.Screen name="Search" children={() => <NestedStack props={theme}/>}
                             options={{
                                 tabBarLabel: 'Search',
-                                tabBarIcon: () => (<MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),
+                                tabBarIcon: () => (
+                                    <MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),
+                                title: 'Manual Search',
                             }}
                 />
-                <Tab.Screen name="Details" children={() => <DetailsScreen props={theme}/>} options={{
-                    tabBarLabel: 'Details',
-                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
+                <Tab.Screen name="Scanner" children={() => <DetailsScreen props={theme}/>} options={{
+                    tabBarLabel: 'Scanner',
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="barcode" color={theme.colors.navBarIcon} size={26}/>),
                 }}
                 />
-                <Tab.Screen name="Details2" children={() => <DetailsScreen props={theme}/>} options={{
-                    tabBarLabel: 'Details',
-                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
+                <Tab.Screen name="Account" children={() => <DetailsScreen props={theme}/>} options={{
+                    tabBarLabel: 'Account',
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="account" color={theme.colors.navBarIcon} size={26}/>),
                 }}
                 />
             </Tab.Navigator>
+
         </NavigationContainer>
-    );
+    )
+        ;
 }
 
 const lightTheme = {
