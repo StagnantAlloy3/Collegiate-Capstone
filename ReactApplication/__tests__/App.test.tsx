@@ -16,6 +16,7 @@ import {fireEvent, render, waitFor} from "@testing-library/react-native";
 it('shows the Home Page', async() => {
     const {getByText} = render(<App/>);
     await waitFor(() => {
+        // @ts-ignore
         expect(getByText('Home Screen')).toBeTruthy();
     });
 });
@@ -24,6 +25,7 @@ it('navigates to Details Page by clicking on the details icon', async () => {
     const { getByText } = render(<App />);
 
     await waitFor(() => {
+        // @ts-ignore
         expect(getByText('Home Screen')).toBeTruthy();
     });
 
@@ -33,7 +35,9 @@ it('navigates to Details Page by clicking on the details icon', async () => {
 
     // Check if the details function is rendering
     setTimeout(() => {
+        // @ts-ignore
         expect(getByText('Details Screen')).toBeTruthy();
+        // @ts-ignore
         done();
     }, 1000);
 });
@@ -42,6 +46,7 @@ it('navigates to Details2 Page by clicking the details2 icon', async () => {
     const { getByText } = render(<App />);
 
     await waitFor(() => {
+        // @ts-ignore
         expect(getByText('Home Screen')).toBeTruthy();
     });
 
@@ -51,7 +56,9 @@ it('navigates to Details2 Page by clicking the details2 icon', async () => {
 
     // Check if the details function is rendering
     setTimeout(() => {
+        // @ts-ignore
         expect(getByText('Details Screen')).toBeTruthy();
+        // @ts-ignore
         done();
     }, 1000);
 });
