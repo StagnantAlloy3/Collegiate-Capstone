@@ -1,7 +1,10 @@
 /**
- * Navigation with Material Bottom Tab Navigator to support other pages.
+ * App Component
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
  *
- * @format
+ * @returns {React.JSX.Element} Navigation container with three routes.
  */
 
 //Importing the necessary modules from react-native
