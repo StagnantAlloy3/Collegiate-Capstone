@@ -1,10 +1,10 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Navigation with Material Bottom Tab Navigator to support other pages.
  *
  * @format
  */
 
+//Importing the necessary modules from react-native
 import React from 'react';
 import {
     StatusBar,
@@ -12,14 +12,13 @@ import {
     useColorScheme,
     View,
 } from 'react-native';
-
 import {useTheme} from '@react-navigation/native';
-
 import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
+//Home Component (Placeholder)
 function Home({props}: { props: any }) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
@@ -28,6 +27,7 @@ function Home({props}: { props: any }) {
     );
 }
 
+//Details Component (Placeholder)
 function DetailsScreen({props} : {props: any}) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
@@ -36,18 +36,23 @@ function DetailsScreen({props} : {props: any}) {
     );
 }
 
+//App Component
 function App(): React.JSX.Element {
+    // Check if dark mode or not, then set the theming appropriately
     const isDarkMode = useColorScheme() == 'dark';
     const theme = isDarkMode ? darkTheme : lightTheme;
     const stripTheme = useTheme();
 
     //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
+    // Line removes the background from the icons in the nav bar when icon is selected.
+    // @ts-ignore
     stripTheme.colors.secondaryContainer = 'transparent';
 
+    //Creates the BottomTab Navigator
     const Tab = createMaterialBottomTabNavigator();
 
 
-
+    //Returns the Navigation container with three routes.
     return (
         <NavigationContainer>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -66,7 +71,7 @@ function App(): React.JSX.Element {
                 }}
                 />
                 <Tab.Screen name="Details2" children={() => <DetailsScreen props={theme}/>} options={{
-                    tabBarLabel: 'Details',
+                    tabBarLabel: 'Details2',
                     tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
                 }}
                 />
@@ -75,6 +80,7 @@ function App(): React.JSX.Element {
     );
 }
 
+//Light theme colors for the app
 const lightTheme = {
     dark: false,
     colors: {
@@ -90,6 +96,7 @@ const lightTheme = {
     },
 };
 
+//Dark theme colors for the app
 const darkTheme = {
     dark: true,
     colors: {
