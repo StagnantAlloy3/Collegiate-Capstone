@@ -10,8 +10,48 @@ import App from '../App';
 import {it} from '@jest/globals';
 
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+import {act} from 'react-test-renderer';
+import {fireEvent, render, waitFor} from "@testing-library/react-native";
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+it('shows the Home Page', async() => {
+    const {getByText} = render(<App/>);
+    await waitFor(() => {
+        expect(getByText('Home Screen')).toBeTruthy();
+    });
+});
+
+it('navigates to Details Page by clicking on the details icon', async () => {
+    const { getByText } = render(<App />);
+
+    await waitFor(() => {
+        expect(getByText('Home Screen')).toBeTruthy();
+    });
+
+    act(() => {
+        fireEvent.press(getByText('Details'));
+    });
+
+    // Check if the details function is rendering
+    setTimeout(() => {
+        expect(getByText('Details Screen')).toBeTruthy();
+        done();
+    }, 1000);
+});
+
+it('navigates to Details2 Page by clicking the details2 icon', async () => {
+    const { getByText } = render(<App />);
+
+    await waitFor(() => {
+        expect(getByText('Home Screen')).toBeTruthy();
+    });
+
+    act(() => {
+        fireEvent.press(getByText('Details2'));
+    });
+
+    // Check if the details function is rendering
+    setTimeout(() => {
+        expect(getByText('Details Screen')).toBeTruthy();
+        done();
+    }, 1000);
 });
