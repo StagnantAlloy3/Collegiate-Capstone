@@ -10,55 +10,52 @@ import App from '../App';
 import {it} from '@jest/globals';
 
 // Note: test renderer must be required after react-native.
-import {act} from 'react-test-renderer';
-import {fireEvent, render, waitFor} from "@testing-library/react-native";
+import {fireEvent, render} from "@testing-library/react-native";
 
+
+//Runs no issues
 it('shows the Home Page', async() => {
-    const {getByText} = render(<App/>);
-    await waitFor(() => {
-        // @ts-ignore
-        expect(getByText('Home Screen')).toBeTruthy();
-    });
+
+    // @ts-ignore
+    jest.useFakeTimers();
+
+    const tree = render(<App/>).toJSON();
+
+    expect(tree).toMatchSnapshot();
+
 });
 
+
+//Runs with major console issues
 it('navigates to Details Page by clicking on the details icon', async () => {
-    const { getByText } = render(<App />);
 
-    await waitFor(() => {
-        // @ts-ignore
-        expect(getByText('Home Screen')).toBeTruthy();
-    });
+    // @ts-ignore
+    jest.useFakeTimers();
 
-    act(() => {
-        fireEvent.press(getByText('Details'));
-    });
+    const tree = render(<App/>);
+
+    //click on the element with the details text
+    fireEvent.press(tree.getByText('Details'));
+
+    tree.toJSON();
 
     // Check if the details function is rendering
-    setTimeout(() => {
-        // @ts-ignore
-        expect(getByText('Details Screen')).toBeTruthy();
-        // @ts-ignore
-        done();
-    }, 1000);
+    expect(tree).toMatchSnapshot();
+
 });
 
 it('navigates to Details2 Page by clicking the details2 icon', async () => {
-    const { getByText } = render(<App />);
 
-    await waitFor(() => {
-        // @ts-ignore
-        expect(getByText('Home Screen')).toBeTruthy();
-    });
+    // @ts-ignore
+    jest.useFakeTimers();
 
-    act(() => {
-        fireEvent.press(getByText('Details2'));
-    });
+    const tree = render(<App/>);
+
+    //click on the element with the details text
+    fireEvent.press(tree.getByText('Details2'));
+
+    tree.toJSON();
 
     // Check if the details function is rendering
-    setTimeout(() => {
-        // @ts-ignore
-        expect(getByText('Details Screen')).toBeTruthy();
-        // @ts-ignore
-        done();
-    }, 1000);
+    expect(tree).toMatchSnapshot();
 });

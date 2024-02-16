@@ -25,7 +25,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 function Home({props}: { props: any }) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
-            <Text>Home Screen</Text>
+            <Text testID="HomeScreen-Text">Home Screen</Text>
         </View>
     );
 }
