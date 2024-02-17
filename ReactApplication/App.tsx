@@ -20,6 +20,20 @@ import {createMaterialBottomTabNavigator} from "@react-navigation/material-botto
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import ManualItemSearch from "./Pages/ManualItemSearch";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {ItemDetails} from "./Pages/ItemDetails.tsx";
+
+function ManualItemSearchNavigation({props} : {props: any}) {
+
+    const manualTabs = createNativeStackNavigator();
+
+    return (
+        <manualTabs.Navigator>
+            <manualTabs.Screen name="Manual Search" children={() => <ManualItemSearch props={props}/>}/>
+            <manualTabs.Screen name="Item Details" children={() => <ItemDetails props={props}/>}/>
+        </manualTabs.Navigator>
+    );
+}
 
 
 function DetailsScreen({props} : {props: any}) {
@@ -48,7 +62,7 @@ function App(): React.JSX.Element {
                        backgroundColor={theme.colors.background}/>
             <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
                            shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
-                <Tab.Screen name="Search" children={() => <ManualItemSearch props={theme}/> }
+                <Tab.Screen name="Search" children={() => <ManualItemSearchNavigation props={theme}/> }
                             options={{
                                 tabBarLabel: 'Search',
                                 tabBarIcon: () => (<MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),

@@ -4,11 +4,9 @@ import {FlatList, Text, TextInput, TouchableOpacity, View} from "react-native";
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
 
-
     const [search, setSearch] = useState('');
     const [items, setItems] = useState([]);
     let bodyBlock;
-
 
     useEffect(() => {
         console.log(search);
