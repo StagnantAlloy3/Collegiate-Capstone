@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
+
+    const navigation = useNavigation();
 
     const [search, setSearch] = useState('');
     const [items, setItems] = useState([]);
@@ -59,7 +62,10 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
             <FlatList data={items} renderItem={({item}) => (
                 <ListItem
                     title={item.description}
-                    onClick={() => console.log(item)}
+                    onClick={() => {
+                        props.fdc_id = item.fdc_id;
+                        navigation.navigate('Item Details');
+                    }}
                 />
             )}/>
         </View>;
@@ -67,7 +73,6 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
 
     return (
         <View style={{backgroundColor: props.colors.background}}>
-            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
             <View style={{backgroundColor: props.colors.background}}>
                 <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
                            style={{
@@ -80,22 +85,6 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
             {bodyBlock}
         </View>
     );
-
-    /*return (
-        <View style={{ backgroundColor: props.colors.background}}>
-            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
-            <View style={{backgroundColor: props.colors.background}}>
-                <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
-                           style={{borderColor: props.colors.border, borderStyle: 'solid', borderWidth: 1, color: props.colors.text}} placeholderTextColor={props.colors.text}/>
-            </View>
-            <FlatList data={items} renderItem={({item}) => (
-                <ListItem
-                    title={item.description}
-                    onClick={() => console.log(item)}
-                />
-            )}/>
-        </View>
-    );*/
 }
 
 export default ManualItemSearch;
