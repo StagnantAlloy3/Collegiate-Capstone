@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {useNavigation} from "@react-navigation/native";
+
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
+
+    const navigation = useNavigation();
 
     const [search, setSearch] = useState('');
     const [items, setItems] = useState([]);
@@ -33,7 +37,7 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
         return () => clearTimeout(delaySearch);
     }, [search]);
 
-    /*const ListItem = ({title, onClick}) => {
+    const ListItem = ({title, onClick}) => {
         return (
             <TouchableOpacity onPress={onClick}
                               style={{borderBottomWidth: 1, borderColor: props.colors.border, borderStyle: "solid"}}>
@@ -42,7 +46,7 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
                 </View>
             </TouchableOpacity>
         );
-    }*/
+    }
 
     if (items.length == 0) {
         bodyBlock = <View style={{
@@ -56,19 +60,19 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
     } else {
         bodyBlock = <View>
             <FlatList data={items} renderItem={({item}) => (
-                <TouchableOpacity onPress={() => navigation.navigate("ItemDetails", {screen: 'ItemDetails', params: {item: item}}) }
-                                  style={{borderBottomWidth: 1, borderColor: props.colors.border, borderStyle: "solid"}}>
-                    <View style={{padding: 10, backgroundColor: props.colors.background}}>
-                        <Text style={{color: props.colors.text}}>{item.description}</Text>
-                    </View>
-                </TouchableOpacity>
+                <ListItem
+                    title={item.description}
+                    onClick={() => {
+                        props.fdc_id = item.fdc_id;
+                        navigation.navigate('Item Details');
+                    }}
+                />
             )}/>
         </View>;
     }
 
     return (
         <View style={{backgroundColor: props.colors.background}}>
-            <Text style={{color: props.colors.text, textAlign: "center"}}>Manual Item Search</Text>
             <View style={{backgroundColor: props.colors.background}}>
                 <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
                            style={{
