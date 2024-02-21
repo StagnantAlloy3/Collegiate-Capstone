@@ -4,7 +4,7 @@
  * It uses a Material Bottom Tab Navigator to navigate between different screens.
  * It also checks if the system is in dark mode and sets the theme app-wide.
  *
- * @returns {React.JSX.Element} Navigation container with three routes.
+ * @returns {Function} Navigation container with three routes.
  */
 
 //Importing the necessary modules from react-native
@@ -21,7 +21,7 @@ import {createMaterialBottomTabNavigator} from "@react-navigation/material-botto
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
-//Home Component (Placeholder)
+//Home Component (Placeholder) - Function will move into its one file in a later story
 function Home({props}: { props: any }) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
@@ -30,7 +30,7 @@ function Home({props}: { props: any }) {
     );
 }
 
-//Details Component (Placeholder)
+//Details Component (Placeholder) - Function will move into its one file in a later story
 function DetailsScreen({props} : {props: any}) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
@@ -39,7 +39,15 @@ function DetailsScreen({props} : {props: any}) {
     );
 }
 
-//App Component
+/**
+ * App Component
+ *
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
+ *
+ * @returns {React.JSX.Element} Navigation container with three routes.
+ */
 function App(): React.JSX.Element {
     // Check if dark mode or not, then set the theming appropriately
     const isDarkMode = useColorScheme() == 'dark';

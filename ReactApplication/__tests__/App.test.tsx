@@ -11,6 +11,8 @@ import {it} from '@jest/globals';
 
 // Note: test renderer must be required after react-native.
 import {fireEvent, render} from "@testing-library/react-native";
+import {Animated} from "react-native";
+import delay = Animated.delay;
 
 
 //Runs no issues
@@ -37,6 +39,7 @@ it('navigates to Details Page by clicking on the details icon', async () => {
     //click on the element with the details text
     fireEvent.press(tree.getByText('Details'));
 
+    delay(2000);
     tree.toJSON();
 
     // Check if the details function is rendering
@@ -54,6 +57,7 @@ it('navigates to Details2 Page by clicking the details2 icon', async () => {
     //click on the element with the details text
     fireEvent.press(tree.getByText('Details2'));
 
+    delay(2000);
     tree.toJSON();
 
     // Check if the details function is rendering
