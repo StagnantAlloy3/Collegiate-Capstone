@@ -1,118 +1,126 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * App Component
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
  *
- * @format
+ * @returns {Function} Navigation container with three routes.
  */
 
+//Importing the necessary modules from react-native
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+    StatusBar,
+    Text,
+    useColorScheme,
+    View,
 } from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import {NavigationContainer} from "@react-navigation/native";
+import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+//Home Component (Placeholder) - Function will move into its one file in a later story
+function Home({props}: { props: any }) {
+    return (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
+            <Text testID="HomeScreen-Text">Home Screen</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+//Details Component (Placeholder) - Function will move into its one file in a later story
+function DetailsScreen({props} : {props: any}) {
+    return (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
+            <Text>Details Screen</Text>
+        </View>
+    );
+}
+
+/**
+ * App Component
+ *
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
+ *
+ * @returns {React.JSX.Element} Navigation container with three routes.
+ */
+function App(): React.JSX.Element {
+    // Check if dark mode or not, then set the theming appropriately
+    const isDarkMode = useColorScheme() == 'dark';
+    const theme = isDarkMode ? darkTheme : lightTheme;
+    const stripTheme = useTheme();
+
+    //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
+    // Line removes the background from the icons in the nav bar when icon is selected.
+    // @ts-ignore
+    stripTheme.colors.secondaryContainer = 'transparent';
+
+    //Creates the BottomTab Navigator
+    const Tab = createMaterialBottomTabNavigator();
+
+
+    //Returns the Navigation container with three routes.
+    return (
+        <NavigationContainer>
+            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                       backgroundColor={theme.colors.background}/>
+            <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
+                           shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
+                <Tab.Screen name="Home" children={() => <Home props={theme}/> }
+                            options={{
+                                tabBarLabel: 'Home',
+                                tabBarIcon: () => (<MaterialIcons name="home" color={theme.colors.navBarIcon} size={26}/>),
+                            }}
+                />
+                <Tab.Screen name="Details" children={() => <DetailsScreen props={theme}/>} options={{
+                    tabBarLabel: 'Details',
+                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
+                }}
+                />
+                <Tab.Screen name="Details2" children={() => <DetailsScreen props={theme}/>} options={{
+                    tabBarLabel: 'Details2',
+                    tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
+                }}
+                />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
+}
+
+//Light theme colors for the app
+const lightTheme = {
+    dark: false,
+    colors: {
+        text: '#000000',
+        primary: '#D2D2C8',
+        secondary: '#F0F5EF',
+        warning: '#B6B7B2',
+        border: '#EFF1E6',
+        background: '#E0E2D7',
+        navBarBackground: '#E0E2D7',
+        navBarIcon: '#B6B7B2',
+        navBarText: '##B6B7B2',
+    },
+};
+
+//Dark theme colors for the app
+const darkTheme = {
+    dark: true,
+    colors: {
+        text: '#ffffff',
+        primary: '#4F81F7',
+        secondary: '#3A356E',
+        warning: '#F5F549',
+        border: '#00F4CC',
+        background: '#000000',
+        navBarBackground: '#000000',
+        navBarIcon: '#EFB7FF',
+        navBarText: '#EFB7FF',
+    },
+}
 
 export default App;
