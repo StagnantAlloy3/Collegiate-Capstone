@@ -45,7 +45,6 @@ public class FDCIDQuery {
 
         try{
             MongoClient mongoClient = MongoClients.create(connString);
-            System.out.println("Connected to MongoDB");
 
             Document search = new Document();
             search.put("fdc_id", fdc_id);
@@ -59,7 +58,7 @@ public class FDCIDQuery {
                     itemInfo.addProperty("brand_owner", doc.getString("brand_owner"));
                     itemInfo.addProperty("ingredients", doc.getString("ingredients"));
                     itemInfo.addProperty("branded_food_category", doc.getString("branded_food_category"));
-                    /*itemInfo.addProperty("modification_date", doc.getDate("modification_date").toString());*/
+                    itemInfo.addProperty("modified_date", String.valueOf(doc.getDate("modified_date")));
                 }
                 else{
                     itemInfo.addProperty("error", "No item found with the given fdc_id");
@@ -69,8 +68,6 @@ public class FDCIDQuery {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(itemInfo);
         return itemInfo.toString();
     }
 }
