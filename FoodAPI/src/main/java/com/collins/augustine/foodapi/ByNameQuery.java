@@ -24,7 +24,7 @@ import org.bson.Document;
  */
 
 @Path("/items/by-name")
-public class ByName {
+public class ByNameQuery {
 
     /**
      * The method returns a JSON array of items that match the query value.
@@ -43,7 +43,6 @@ public class ByName {
         ConnectionString connString = new ConnectionString("mongodb://localhost:27017/Foods");
         try{
             MongoClient mongoClient = MongoClients.create(connString);
-            System.out.println("Connected to MongoDB");
 
             Document regex = new Document();
             regex.put("$regex", "^(?)" + name);
@@ -69,8 +68,6 @@ public class ByName {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
-        System.out.println("Items: " + items);
 
         return items.toString();
     }
