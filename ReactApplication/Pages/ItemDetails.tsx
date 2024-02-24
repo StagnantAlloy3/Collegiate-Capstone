@@ -2,9 +2,9 @@ import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 
 /**TODO
-    * 1. Figure out a better layout.
-    * 2. Add jsDoc comments.
-    * 3. (General Comment) - Start a centralized stylesheet for the app.
+ * 1. Figure out a better layout.
+ * 2. Add jsDoc comments.
+ * 3. (General Comment) - Start a centralized stylesheet for the app.
  */
 
 export function ItemDetails({props}: { props: any }) {
@@ -26,14 +26,16 @@ export function ItemDetails({props}: { props: any }) {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then((response => response.json()))
+        })
+            .then((response => response.json()))
             .then((json) => {
                 console.log(json);
                 setItem(json);
-            }).catch((error) => {
-            console.error(error);
-            return error;
-        });
+            })
+            .catch((error) => {
+                console.error(error);
+                return error;
+            });
     }, []);
 
     return (
