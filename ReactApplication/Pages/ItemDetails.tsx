@@ -37,7 +37,7 @@ export function ItemDetails({props}: { props: any }) {
     }, []);
 
     return (
-        <View style={[styles.container, {flexDirection: 'column', backgroundColor: props.colors.background}]}>
+        <ScrollView style={[styles.container, {flexDirection: 'column', backgroundColor: props.colors.background}]}>
             {/*<Text>Item clicked was: {props.fdc_id}</Text>*/}
             <View style={[styles.container, {flexDirection: 'row'}]}>
                 <View style={{flex: 1}}>
@@ -57,15 +57,14 @@ export function ItemDetails({props}: { props: any }) {
                 </View>
             </View>
 
-            <ScrollView>
+            <View style={{padding: 8}}>
                 <View style={{flex: 1}}>
                     <Text style={{fontSize: 24, fontWeight: "bold"}}>Ingredients:</Text>
                 </View>
                 <View style={{flex: 1}}>
                     <Text style={{fontSize: 24}}>{item.ingredients}</Text>
                 </View>
-            </ScrollView>
-
+            </View>
             <View style={[styles.container, {flexDirection: 'row'}]}>
                 <View style={{flex: 1}}>
                     <Text style={{fontSize: 24, fontWeight: "bold"}}>Last Updated:</Text>
@@ -74,6 +73,6 @@ export function ItemDetails({props}: { props: any }) {
                     <Text style={{fontSize: 24}}>{item.modified_date}</Text>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }

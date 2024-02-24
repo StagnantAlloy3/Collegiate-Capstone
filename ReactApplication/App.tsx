@@ -99,7 +99,7 @@ function App(): React.JSX.Element {
 }
 
 //Light theme colors for the app
-const lightTheme = {
+/*const lightTheme = {
     dark: false,
     colors: {
         text: '#000000',
@@ -110,7 +110,22 @@ const lightTheme = {
         background: '#E0E2D7',
         navBarBackground: '#E0E2D7',
         navBarIcon: '#B6B7B2',
-        navBarText: '##B6B7B2',
+        navBarText: '#B6B7B2',
+    },
+};*/
+
+const lightTheme = {
+    dark: false,
+    colors: {
+        text: '#000000',
+        primary: '#606B73',
+        secondary: '#F0F5EF',
+        warning: '#B6B7B2',
+        border: '#EFF1E6',
+        background: '#FFFFFF',
+        navBarBackground: '#FFFFFF',
+        navBarIcon: '#7A7A7A',
+        navBarText: '#7A7A7A',
     },
 };
 
