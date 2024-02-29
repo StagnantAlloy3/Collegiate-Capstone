@@ -1,10 +1,13 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * App Component
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
  *
- * @format
+ * @returns {Function} Navigation container with three routes.
  */
 
+//Importing the necessary modules from react-native
 import React from 'react';
 import {
     StatusBar,
@@ -12,16 +15,29 @@ import {
     useColorScheme,
     View,
 } from 'react-native';
-
 import {useTheme} from '@react-navigation/native';
-
 import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import ManualItemSearch from "./Pages/ManualItemSearch";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {ItemDetails} from "./Pages/ItemDetails.tsx";
+
+function ManualItemSearchNavigation({props} : {props: any}) {
+
+    const manualTabs = createNativeStackNavigator();
+
+    return (
+        <manualTabs.Navigator>
+            <manualTabs.Screen name="Manual Search" children={() => <ManualItemSearch props={props}/>}/>
+            <manualTabs.Screen name="Item Details" children={() => <ItemDetails props={props}/>}/>
+        </manualTabs.Navigator>
+    );
+}
 
 
+//Details Component (Placeholder) - Function will move into its one file in a later story
 function DetailsScreen({props} : {props: any}) {
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
@@ -30,25 +46,38 @@ function DetailsScreen({props} : {props: any}) {
     );
 }
 
+/**
+ * App Component
+ *
+ * This is the main component of the application. It sets up the navigation and theme for the application.
+ * It uses a Material Bottom Tab Navigator to navigate between different screens.
+ * It also checks if the system is in dark mode and sets the theme app-wide.
+ *
+ * @returns {React.JSX.Element} Navigation container with three routes.
+ */
 function App(): React.JSX.Element {
+    // Check if dark mode or not, then set the theming appropriately
     const isDarkMode = useColorScheme() == 'dark';
     const theme = isDarkMode ? darkTheme : lightTheme;
     const stripTheme = useTheme();
 
     //This line absolutely works. Not sure why the error throws.  Watch the background of the navbar with and without this line commented out.
+    // Line removes the background from the icons in the nav bar when icon is selected.
     // @ts-ignore
     stripTheme.colors.secondaryContainer = 'transparent';
 
+    //Creates the BottomTab Navigator
     const Tab = createMaterialBottomTabNavigator();
 
 
+    //Returns the Navigation container with three routes.
     return (
         <NavigationContainer>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                        backgroundColor={theme.colors.background}/>
             <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
                            shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
-                <Tab.Screen name="Search" children={() => <ManualItemSearch props={theme}/> }
+                <Tab.Screen name="Search" children={() => <ManualItemSearchNavigation props={theme}/> }
                             options={{
                                 tabBarLabel: 'Search',
                                 tabBarIcon: () => (<MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),
@@ -60,7 +89,7 @@ function App(): React.JSX.Element {
                 }}
                 />
                 <Tab.Screen name="Details2" children={() => <DetailsScreen props={theme}/>} options={{
-                    tabBarLabel: 'Details',
+                    tabBarLabel: 'Details2',
                     tabBarIcon: () => (<MaterialIcons name="info" color={theme.colors.navBarIcon} size={26}/>),
                 }}
                 />
@@ -69,6 +98,7 @@ function App(): React.JSX.Element {
     );
 }
 
+//Light theme colors for the app
 const lightTheme = {
     dark: false,
     colors: {
@@ -84,6 +114,7 @@ const lightTheme = {
     },
 };
 
+//Dark theme colors for the app
 const darkTheme = {
     dark: true,
     colors: {
