@@ -37,6 +37,7 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
         return () => clearTimeout(delaySearch);
     }, [search]);
 
+    // @ts-ignore
     const ListItem = ({title, onClick}) => {
         return (
             <TouchableOpacity onPress={onClick}
@@ -58,12 +59,16 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
             <Text>No Items Found</Text>
         </View>;
     } else {
+        // @ts-ignore
         bodyBlock = <View>
             <FlatList data={items} renderItem={({item}) => (
                 <ListItem
+                    //@ts-ignore
                     title={item.description}
                     onClick={() => {
+                        // @ts-ignore
                         props.fdc_id = item.fdc_id;
+                        // @ts-ignore
                         navigation.navigate('Item Details');
                     }}
                 />
