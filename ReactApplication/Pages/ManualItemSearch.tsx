@@ -11,12 +11,12 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
     const [items, setItems] = useState([]);
     let bodyBlock;
 
-    useEffect(() => {
+    /*useEffect(() => {
         console.log(search);
         const delaySearch = setTimeout(() => {
             console.log(search);
             if (search.length > 1) {
-                /*setItems(ByName(search));*/
+                /!*setItems(ByName(search));*!/
                 fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-name?itemname=${search}`, {
                     method: 'GET',
                     headers: {
@@ -34,6 +34,32 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
                 setItems([]);
             }
         }, 1000);
+        return () => clearTimeout(delaySearch);
+    }, [search]);*/
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                console.log(search);
+                if (search.length > 1) {
+                    const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-name?itemname=${search}`, {
+                        method: 'GET',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                    });
+                    const json = await response.json();
+                    setItems(json);
+                } else {
+                    setItems([]);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const delaySearch = setTimeout(fetchItems, 1000);
         return () => clearTimeout(delaySearch);
     }, [search]);
 

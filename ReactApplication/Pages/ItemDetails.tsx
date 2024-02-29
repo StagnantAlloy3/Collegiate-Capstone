@@ -18,7 +18,7 @@ export function ItemDetails({props}: { props: any }) {
         }
     });
 
-    useEffect(() => {
+    /*useEffect(() => {
         setItem({});
         fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`, {
             method: 'GET',
@@ -36,11 +36,32 @@ export function ItemDetails({props}: { props: any }) {
                 console.error(error);
                 return error;
             });
+    }, []);*/
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("Fetching Data" + " " + props.fdc_id);
+            try{
+             setItem({});
+                const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`, {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+            });
+                const json = await response.json();
+                setItem(json);
+            } catch (error) {
+                console.error(error);
+                return error;
+            }
+        };
+        fetchData();
     }, []);
 
     return (
         <ScrollView style={[styles.container, {flexDirection: 'column', backgroundColor: props.colors.background}]}>
-            {/*<Text>Item clicked was: {props.fdc_id}</Text>*/}
             <View style={[styles.container, {flexDirection: 'row'}]}>
                 <View style={{flex: 1}}>
                     <Text style={{fontSize: 24, fontWeight: "bold"}}>Brand:</Text>
