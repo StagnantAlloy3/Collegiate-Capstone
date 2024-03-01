@@ -3,13 +3,24 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 
 /**TODO
  * 1. Figure out a better layout.
- * 2. Add jsDoc comments.
  * 3. (General Comment) - Start a centralized stylesheet for the app.
  */
 
+/*
+ * Item details component. This page will be returned whenever an item is searched from either the Manual Item Search or
+ * the Barcode Scanner.
+ * @param props
+ * @constructor
+*/
+
 export function ItemDetails({props}: { props: any }) {
 
-    const [item, setItem] = React.useState({});
+    const [item, setItem] = React.useState({
+        brand_owner: undefined,
+        branded_food_category: undefined,
+        modified_date: undefined,
+        ingredients: undefined
+    });
 
     const styles = StyleSheet.create({
         container: {
@@ -18,31 +29,16 @@ export function ItemDetails({props}: { props: any }) {
         }
     });
 
-    /*useEffect(() => {
-        setItem({});
-        fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-        })
-            .then((response => response.json()))
-            .then((json) => {
-                console.log(json);
-                setItem(json);
-            })
-            .catch((error) => {
-                console.error(error);
-                return error;
-            });
-    }, []);*/
-
     useEffect(() => {
         const fetchData = async () => {
             console.log("Fetching Data" + " " + props.fdc_id);
             try{
-             setItem({});
+             setItem({
+                 brand_owner: undefined,
+                 branded_food_category: undefined,
+                 ingredients: undefined,
+                 modified_date: undefined
+             });
                 const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`, {
                     method: 'GET',
                     headers: {
@@ -52,6 +48,7 @@ export function ItemDetails({props}: { props: any }) {
             });
                 const json = await response.json();
                 setItem(json);
+                console.log(json);
             } catch (error) {
                 console.error(error);
                 return error;

@@ -2,40 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
+/**
+ * Component for manual item search
+ * @param props
+ */
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
 
     const navigation = useNavigation();
 
     const [search, setSearch] = useState('');
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState([{
+        description: '',
+        fdc_id: 0
+    }]);
     let bodyBlock;
-
-    /*useEffect(() => {
-        console.log(search);
-        const delaySearch = setTimeout(() => {
-            console.log(search);
-            if (search.length > 1) {
-                /!*setItems(ByName(search));*!/
-                fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-name?itemname=${search}`, {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                }).then((response => response.json()))
-                    .then((json) => {
-                        setItems(json);
-                    }).catch((error) => {
-                    console.error(error);
-                    return error;
-                });
-            } else {
-                setItems([]);
-            }
-        }, 1000);
-        return () => clearTimeout(delaySearch);
-    }, [search]);*/
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -85,14 +66,11 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
             <Text>No Items Found</Text>
         </View>;
     } else {
-        // @ts-ignore
         bodyBlock = <View>
             <FlatList data={items} renderItem={({item}) => (
                 <ListItem
-                    //@ts-ignore
                     title={item.description}
                     onClick={() => {
-                        // @ts-ignore
                         props.fdc_id = item.fdc_id;
                         // @ts-ignore
                         navigation.navigate('Item Details');
@@ -111,7 +89,7 @@ function ManualItemSearch({props}: { props: any }): React.JSX.Element {
                                borderStyle: 'solid',
                                borderWidth: 1,
                                color: props.colors.text
-                           }} placeholderTextColor={props.colors.text}/>
+                           }} placeholderTextColor={props.colors.text} testID="ManualItemSearch-Input-Text"/>
             </View>
             {bodyBlock}
         </View>
