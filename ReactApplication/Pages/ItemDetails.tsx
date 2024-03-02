@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 
-/**TODO
+/**TODO Later
  * 1. Figure out a better layout.
  * 3. (General Comment) - Start a centralized stylesheet for the app.
  */
@@ -9,7 +9,7 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 /*
  * Item details component. This page will be returned whenever an item is searched from either the Manual Item Search or
  * the Barcode Scanner.
- * @param props
+ * @param props (color, fdc_id): The color scheme for the app, and the fdc_id of the item to be searched.
  * @constructor
 */
 

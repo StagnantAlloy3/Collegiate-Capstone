@@ -4,7 +4,7 @@ import {useNavigation} from "@react-navigation/native";
 
 /**
  * Component for manual item search
- * @param props
+ * @param props (color): The color scheme for the app.
  */
 
 function ManualItemSearch({props}: { props: any }): React.JSX.Element {
