@@ -5,7 +5,7 @@ import ManualItemSearch from '../Pages/ManualItemSearch'
 import {fireEvent, render} from "@testing-library/react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {wait} from "@testing-library/react-native/build/user-event/utils";
-import {act} from "react-test-renderer";
+import {create} from "react-test-renderer";
 import {it} from "@jest/globals";
 
 const props = {
@@ -36,25 +36,22 @@ describe('ManualItemSearch', () => {
 
         jest.useFakeTimers();
 
-        const page = render(<NavigationContainer><ManualItemSearch props={props}/></NavigationContainer>);
+        const page = create(<NavigationContainer><ManualItemSearch props={props}/></NavigationContainer>).toJSON();
+        expect(page).toMatchSnapshot();
     });
 
     /**
      * This is a test to check whether the input field is intractable.
      */
 
-    it('Check if text box is selectable', async () => {
-        const page = render(<NavigationContainer><ManualItemSearch props={props}/></NavigationContainer>);
-
-        const input = page.getByTestId("ManualItemSearch-Input-Text");
-
-        //.....whyyyyy dont you change text.....
-        await act(() => {
-            fireEvent.changeText(input, "Lays");
-        });
-        console.log(input.props);
-        //console.log(page.toJSON());
-
+    it('Check if text box is selectable', () => {
+        let page, input;
+        page = render(<NavigationContainer><ManualItemSearch props={props}/></NavigationContainer>);
+        input = page.getByPlaceholderText('Item Name');
+        console.log(input.props.placeholder);
+        expect(input.props.placeholder).toBe('Item Name');
+        fireEvent.changeText(page.getByPlaceholderText('Item Name'), 'Lays');
+        expect(input.props.value).toBe('Lays');
     });
 
     /**
