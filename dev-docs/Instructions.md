@@ -30,11 +30,18 @@ terminal if desired.</li>
 <li>You should be greeted with the default tomcat home page.  If not, tomcat is experiencing issues. Check either the 
 terminal or catalina.out log in *tomcatinstallfolder*/logs/catalina.out</li>
 <li>Stopping tomcat you can either close the terminal window, or press ctrl + c in the terminal to close the process.</li>
+<h3>Building a .war file</h3>
+<p>Personally, I use the Intellij smart-deploy feature to build and deploy the .war file to my tomcat instance.  If you are using 
 <h3>Deploying a Project to Tomcat</h3>
 <li>Copy the .war file to *tomcatinstallfolder*/webapps/</li>
 <li>Launch tomcat and navigate to http://localhost:8080/*nameofthewarfile*</li>
-<small>There may be Auto-Deploy integration with VS Code like IntelliJ has.  I will update if an easier method is 
-available.</small>
+<small>There may be Auto-Deploy integration with VS Code like IntelliJ has. If you are using VSC and have the Tomcat for Java extension, there is a
+pre-configured command for generating a .war file from the current directory. It is also possible to use the terminal command 
+'mvn package' from the root directory of the project (FoodAPI) assuming Maven is configured on the system.</small>
+<h3>Troubleshooting</h3>
+<li>A port is already in use: Go to the root tomcat folder and navigate to conf and open the server.xml file.  Search for
+the occupied port.  Be aware that if you change the deploy port (8080), you may need to alter code in the project to reflect 
+the port change.</li>
 <hr>
 
 <h2>NodeJS Installation and Testing</h2>
@@ -139,6 +146,17 @@ is not available, select "Download" and choose a Java 19 jre. I am personally us
 <h3>VSCode Installation and Testing</h3>
 <p>I haven't gotten this far yet, but putting here as a placeholder for circling back.  Will update when I install VCS 
 and get it configured.</p>
+
+<hr>
+
+<h3>Android Port Forwarding (Emulator and Physical Device)</h3>
+<p>To enable the endpoint integration with the react application, you will need to enable port forwarding from the android device to your PC/mac.  To do this:
+<li>Open a new terminal window.</li>
+<li>Type 'adb devices'. This will show a list of connected android devices with USB-debugging.</li>
+<li>Type 'adb -s *DEVICE NAME AS LISTED* reverse tcp:*tomcat port number* tcp:*tomcatportnumber*'.For me, that command looked 
+like this: 'adb -s emulator-554 reverse tcp:8080 tcp:8080'.</li>
+This will enable the phone or emulated decide to route through the computers port, instead of using its own.  Without doing 
+this, you will receive network errors with all the endpoint functionality.  This process will need to be done each time the device is disconnected from the host computer. :(</p>
 
 <hr>
 
