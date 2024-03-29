@@ -19,7 +19,6 @@ public class FDCIDQueryTest {
 
     /**
      * Test of the FDCIDQuery endpoint functionality.
-     *
      */
 
 
