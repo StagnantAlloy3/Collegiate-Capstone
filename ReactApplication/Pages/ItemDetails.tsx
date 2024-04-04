@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 /**TODO Later
  * 1. Figure out a better layout.
@@ -11,88 +11,94 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
  * the Barcode Scanner.
  * @param props (color, fdc_id): The color scheme for the app, and the fdc_id of the item to be searched.
  * @constructor
-*/
+ */
 
-export function ItemDetails({props}: { props: any }) {
+export function ItemDetails({props}: {props: any}) {
+  const [item, setItem] = React.useState({
+    brand_owner: undefined,
+    branded_food_category: undefined,
+    modified_date: undefined,
+    ingredients: undefined,
+  });
 
-    const [item, setItem] = React.useState({
-        brand_owner: undefined,
-        branded_food_category: undefined,
-        modified_date: undefined,
-        ingredients: undefined
-    });
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 8,
+    },
+  });
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            padding: 8,
-        }
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('Fetching Data' + ' ' + props.fdc_id);
+      try {
+        setItem({
+          brand_owner: undefined,
+          branded_food_category: undefined,
+          ingredients: undefined,
+          modified_date: undefined,
+        });
+        const response = await fetch(
+          `http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`,
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        const json = await response.json();
+        setItem(json);
+        console.log(json);
+      } catch (error) {
+        console.error(error);
+        return error;
+      }
+    };
+    fetchData();
+  }, [props.fdc_id]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("Fetching Data" + " " + props.fdc_id);
-            try{
-             setItem({
-                 brand_owner: undefined,
-                 branded_food_category: undefined,
-                 ingredients: undefined,
-                 modified_date: undefined
-             });
-                const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-id?fdc_id=${props.fdc_id}`, {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-            });
-                const json = await response.json();
-                setItem(json);
-                console.log(json);
-            } catch (error) {
-                console.error(error);
-                return error;
-            }
-        };
-        fetchData();
-    }, []);
+  return (
+    <ScrollView
+      style={[
+        styles.container,
+        {flexDirection: 'column', backgroundColor: props.colors.background},
+      ]}>
+      <View style={[styles.container, {flexDirection: 'row'}]}>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24, fontWeight: 'bold'}}>Brand:</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24}}>{item.brand_owner}</Text>
+        </View>
+      </View>
 
-    return (
-        <ScrollView style={[styles.container, {flexDirection: 'column', backgroundColor: props.colors.background}]}>
-            <View style={[styles.container, {flexDirection: 'row'}]}>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24, fontWeight: "bold"}}>Brand:</Text>
-                </View>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24}}>{item.brand_owner}</Text>
-                </View>
-            </View>
+      <View style={[styles.container, {flexDirection: 'row'}]}>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24, fontWeight: 'bold'}}>Category:</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24}}>{item.branded_food_category}</Text>
+        </View>
+      </View>
 
-            <View style={[styles.container, {flexDirection: 'row'}]}>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24, fontWeight: "bold"}}>Category:</Text>
-                </View>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24}}>{item.branded_food_category}</Text>
-                </View>
-            </View>
-
-            <View style={{padding: 8}}>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24, fontWeight: "bold"}}>Ingredients:</Text>
-                </View>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24}}>{item.ingredients}</Text>
-                </View>
-            </View>
-            <View style={[styles.container, {flexDirection: 'row'}]}>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24, fontWeight: "bold"}}>Last Updated:</Text>
-                </View>
-                <View style={{flex: 1}}>
-                    <Text style={{fontSize: 24}}>{item.modified_date}</Text>
-                </View>
-            </View>
-        </ScrollView>
-    );
+      <View style={{padding: 8}}>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24, fontWeight: 'bold'}}>Ingredients:</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24}}>{item.ingredients}</Text>
+        </View>
+      </View>
+      <View style={[styles.container, {flexDirection: 'row'}]}>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24, fontWeight: 'bold'}}>Last Updated:</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 24}}>{item.modified_date}</Text>
+        </View>
+      </View>
+    </ScrollView>
+  );
 }

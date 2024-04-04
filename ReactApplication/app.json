@@ -1,4 +1,16 @@
 {
   "name": "ReactApplication",
-  "displayName": "ReactApplication"
+  "displayName": "ReactApplication",
+  "expo": {
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow access to camera."
+        }
+      ]
+    ],
+    "name": "ReactApplication",
+    "slug": "App"
+  }
 }
