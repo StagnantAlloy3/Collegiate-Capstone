@@ -109,6 +109,17 @@ preferred. (recommended)</li>
 If this data shows in compass after executing the command, the DB is working as intended.</li>
 <small>IntelliJ has built-in database integration with a query console.  VS Code may have a similar feature, but I'm not 
 sure. I will update if I find similar functionality in VSC.</small>
+
+<h3>Uploading Dataset into MongoDB</h3>
+<li>Download the complete dataset from <a href="https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_csv_2023-10-26.zip">here</a>.</li>
+<li>Extract the zip file to a known location.</li>
+<li>Open the MongoDB Compass GUI and connect to the default connection URL.</li>
+<li>Create a Database in MongoDB and title it "Foods".</li>
+<li>Create a collection under foods with the name "Branded_Foods"</li>
+<li>Select Add Data -> Import from CSV.</li>
+<li>In the dataset downloaded, there will be a branded_food.csv file.  Upload this to MongoDB, leaving the original column names.</li>
+<li>Create a new Collection titled "Food"</li>
+<li>Upload the food.csv file to the "Food" collection, leaving the original column names.</li>
 <hr>
 
 <h2>Postman Installation and Testing</h2>
