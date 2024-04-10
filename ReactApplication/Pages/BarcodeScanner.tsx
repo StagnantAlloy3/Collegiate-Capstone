@@ -1,6 +1,7 @@
 import React from 'react';
 import {RNCamera} from 'react-native-camera';
 import {StyleSheet, View} from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function BarcodeScanner() {
   let barcodeRecognized = ({barcodes}) => {
