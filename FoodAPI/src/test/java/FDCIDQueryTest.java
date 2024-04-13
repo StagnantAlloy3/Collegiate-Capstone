@@ -52,7 +52,7 @@ public class FDCIDQueryTest {
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        Assertions.assertEquals(500, response.statusCode());
+        Assertions.assertEquals(404, response.statusCode());
     }
 
 }
