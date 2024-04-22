@@ -20,15 +20,22 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import ManualItemSearch from "./Pages/ManualItemSearch";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {ItemDetails} from "./Pages/ItemDetails.tsx";
 
-//Home Component (Placeholder) - Function will move into its one file in a later story
-function Home({props}: { props: any }) {
+function ManualItemSearchNavigation({props} : {props: any}) {
+
+    const manualTabs = createNativeStackNavigator();
+
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: props.colors.background}}>
-            <Text testID="HomeScreen-Text">Home Screen</Text>
-        </View>
+        <manualTabs.Navigator>
+            <manualTabs.Screen name="Manual Search" children={() => <ManualItemSearch props={props}/>}/>
+            <manualTabs.Screen name="Item Details" children={() => <ItemDetails props={props}/>}/>
+        </manualTabs.Navigator>
     );
 }
+
 
 //Details Component (Placeholder) - Function will move into its one file in a later story
 function DetailsScreen({props} : {props: any}) {
@@ -70,10 +77,10 @@ function App(): React.JSX.Element {
                        backgroundColor={theme.colors.background}/>
             <Tab.Navigator inactiveColor={theme.colors.secondary} activeColor={theme.colors.navBarIcon} barStyle={{backgroundColor: theme.colors.navBarBackground}}
                            shifting keyboardHidesNavigationBar theme={{colors: {secondaryContainer: 'transparent'}}}>
-                <Tab.Screen name="Home" children={() => <Home props={theme}/> }
+                <Tab.Screen name="Search" children={() => <ManualItemSearchNavigation props={theme}/> }
                             options={{
-                                tabBarLabel: 'Home',
-                                tabBarIcon: () => (<MaterialIcons name="home" color={theme.colors.navBarIcon} size={26}/>),
+                                tabBarLabel: 'Search',
+                                tabBarIcon: () => (<MaterialIcons name="search" color={theme.colors.navBarIcon} size={26}/>),
                             }}
                 />
                 <Tab.Screen name="Details" children={() => <DetailsScreen props={theme}/>} options={{
@@ -92,7 +99,7 @@ function App(): React.JSX.Element {
 }
 
 //Light theme colors for the app
-const lightTheme = {
+/*const lightTheme = {
     dark: false,
     colors: {
         text: '#000000',
@@ -103,7 +110,22 @@ const lightTheme = {
         background: '#E0E2D7',
         navBarBackground: '#E0E2D7',
         navBarIcon: '#B6B7B2',
-        navBarText: '##B6B7B2',
+        navBarText: '#B6B7B2',
+    },
+};*/
+
+const lightTheme = {
+    dark: false,
+    colors: {
+        text: '#000000',
+        primary: '#606B73',
+        secondary: '#F0F5EF',
+        warning: '#B6B7B2',
+        border: '#EFF1E6',
+        background: '#FFFFFF',
+        navBarBackground: '#FFFFFF',
+        navBarIcon: '#7A7A7A',
+        navBarText: '#7A7A7A',
     },
 };
 

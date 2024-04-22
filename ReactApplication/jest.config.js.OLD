@@ -1,3 +1,4 @@
+/*
 //This is a config file for JEST to taylor the expected behavior for the application
 module.exports = {
 
@@ -17,4 +18,4 @@ module.exports = {
     transform: {
         "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-};
+};*/

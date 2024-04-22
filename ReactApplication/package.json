@@ -7,12 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "doc": "typedoc"
   },
   "dependencies": {
     "@react-navigation/material-bottom-tabs": "^6.2.19",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
+    "expo": "^50.0.0",
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-paper": "^5.12.3",
@@ -43,5 +45,19 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules//(?!(react-native|react-native-paper|react-native-vector-icons|@react-navigation|@react-native-community|@react-native|@react-navigation|@react-navigation/native|@react-navigation/native-stack|@react-navigation/material-bottom-tabs)/)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
