@@ -6,6 +6,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Sorts;
 import org.bson.Document;
 
 import javax.ws.rs.GET;
@@ -28,9 +29,9 @@ public class ByBarcodeQuery {
             MongoClient mongoClient = MongoClients.create(connString);
 
             Document searchItem = new Document();
-            searchItem.put("gtin_upc", barcode);
+            searchItem.put("OtherData.gtin_upc", barcode);
 
-            FindIterable<Document> foundItems = mongoClient.getDatabase("Foods").getCollection("Branded_Foods").find(searchItem);
+            FindIterable<Document> foundItems = mongoClient.getDatabase("Food").getCollection("Food").find(searchItem).sort(Sorts.descending("fdc_id"));
 
             try (final MongoCursor<Document> cursor = foundItems.iterator()) {
                 if (cursor.hasNext()) {
