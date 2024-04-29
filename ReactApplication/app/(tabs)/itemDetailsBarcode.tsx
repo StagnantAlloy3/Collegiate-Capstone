@@ -46,9 +46,11 @@ export default function Modal() {
         };
         fetchData();*/
 
+
+        console.log(props.fdcID);
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-barcode?barcode=${props.fdcID}`, {
+                const response = await fetch(`http://localhost:8080/FoodAPI_war_exploded/api/items/by-barcode?barcode=${props.barcode}`, {
                     method: 'GET',
                     headers: {
                         Accept: 'application/json',

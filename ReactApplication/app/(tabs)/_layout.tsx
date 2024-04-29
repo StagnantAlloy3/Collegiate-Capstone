@@ -27,7 +27,13 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="itemDetails"
+                name="itemDetailsManual"
+                options={{
+                    title: 'Item Details',
+                    href: null
+                }}/>
+            <Tabs.Screen
+                name="itemDetailsBarcode"
                 options={{
                     title: 'Item Details',
                     href: null

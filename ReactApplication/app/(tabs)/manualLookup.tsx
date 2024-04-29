@@ -1,6 +1,7 @@
 import {View, Text, TextInput, TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import {useEffect, useState} from "react";
 import FlatList = Animated.FlatList;
+import {useRouter} from "expo-router";
 
 export default function Tab() {
 
@@ -9,6 +10,8 @@ export default function Tab() {
         description: '',
         fdc_id: 0
     }]);
+    const router = useRouter();
+
     let bodyBlock;
 
     useEffect(() => {
@@ -24,6 +27,7 @@ export default function Tab() {
                         },
                     });
                     const json = await response.json();
+                    console.log(json);
                     setItems(json);
                 } else {
                     setItems([]);
@@ -58,9 +62,8 @@ export default function Tab() {
                 <ListItem
                     title={item.description}
                     onClick={() => {
-                        props.fdc_id = item.fdc_id;
-                        // @ts-ignore
-                        navigation.navigate('Item Details');
+                        console.log(item.fdc_id);
+                        router.navigate({pathname: 'itemDetailsManual', params: {fdc_id: item.fdc_id}});
                     }}
                 />
             )}
@@ -72,7 +75,7 @@ export default function Tab() {
         <View>
             <View style={styles.container}>
                 <TextInput placeholder="Item Name" onChangeText={text => setSearch(text)}
-                           style={styles.input} testID="ManualItemSearch-Input-Text"/>
+                           style={styles.input} />
             </View>
             {bodyBlock}
         </View>

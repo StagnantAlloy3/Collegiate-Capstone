@@ -21,7 +21,7 @@ export default function App() {
     }, []);
 
     const scannedBarcode = ({type, data}) => {
-        router.navigate({pathname: 'itemDetails', params: {fdcID: data}});
+        router.navigate({pathname: 'itemDetailsBarcode', params: {barcode: data}});
     }
 
     if (!permission) {
