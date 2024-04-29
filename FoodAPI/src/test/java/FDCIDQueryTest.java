@@ -35,7 +35,7 @@ public class FDCIDQueryTest {
         Assertions.assertTrue(test1.contains("ingredients"));
         Assertions.assertTrue(test1.contains("ingredients"));
         Assertions.assertTrue(test1.contains("modified_date"));
-        Assertions.assertEquals("{\"fdc_id\":1105904,\"brand_owner\":\"Richardson Oilseed Products (US) Limited\",\"ingredients\":\"Vegetable Oil\",\"branded_food_category\":\"Oils Edible\",\"modified_date\":\"Thu Oct 01 20:00:00 EDT 2020\"}", test1);
+        Assertions.assertEquals("{\"fdc_id\":1105904,\"brand_owner\":\"Richardson Oilseed Products (US) Limited\",\"ingredients\":\"Vegetable Oil\",\"branded_food_category\":\"Oils Edible\",\"modified_date\":\"10/2/2020 0:00\"}", test1);
 
 
         //Query with integer overflow
