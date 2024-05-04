@@ -49,16 +49,17 @@ public class FDCIDQuery {
             Document search = new Document();
             search.put("fdc_id", fdc_id);
 
-            FindIterable<Document> foundItem = mongoClient.getDatabase("Foods").getCollection("Branded_Foods").find(search);
+            FindIterable<Document> foundItem = mongoClient.getDatabase("Food").getCollection("Food").find(search);
 
             try(final MongoCursor<Document> cursor = foundItem.iterator()) {
                 if(cursor.hasNext()) {
                     Document doc = cursor.next();
+                    Document otherData = (Document) doc.get("OtherData");
                     itemInfo.addProperty("fdc_id", doc.getInteger("fdc_id"));
-                    itemInfo.addProperty("brand_owner", doc.getString("brand_owner"));
-                    itemInfo.addProperty("ingredients", doc.getString("ingredients"));
-                    itemInfo.addProperty("branded_food_category", doc.getString("branded_food_category"));
-                    itemInfo.addProperty("modified_date", String.valueOf(doc.getDate("modified_date")));
+                    itemInfo.addProperty("brand_owner", otherData.getString("brand_owner"));
+                    itemInfo.addProperty("ingredients", otherData.getString("ingredients"));
+                    itemInfo.addProperty("branded_food_category", otherData.getString("branded_food_category"));
+                    itemInfo.addProperty("modified_date", String.valueOf(otherData.getString("modified_date")));
                 }
                 else{
                     itemInfo.addProperty("error", "No item found with the given fdc_id");

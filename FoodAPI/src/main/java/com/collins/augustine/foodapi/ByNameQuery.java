@@ -39,7 +39,7 @@ public class ByNameQuery {
 
         JsonArray items = new JsonArray();
 
-        ConnectionString connString = new ConnectionString("mongodb://localhost:27017/Foods");
+        ConnectionString connString = new ConnectionString("mongodb://localhost:27017/Food");
         try{
             MongoClient mongoClient = MongoClients.create(connString);
 
@@ -50,7 +50,7 @@ public class ByNameQuery {
             Document searchItem = new Document();
             searchItem.put("description", regex);
 
-            FindIterable<Document> foundItems = mongoClient.getDatabase("Foods").getCollection("Food").find(searchItem);
+            FindIterable<Document> foundItems = mongoClient.getDatabase("Food").getCollection("Food").find(searchItem);
 
             try(final MongoCursor<Document> cursor = foundItems.iterator()) {
                 while(cursor.hasNext()) {
